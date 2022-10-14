@@ -1,25 +1,32 @@
-import { getAuth } from "firebase/auth";
-import './App.css';
-import app from "./Firebase/firebase.init";
-
-const auth = getAuth(app);
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Login from './components/Login';
+import Main from './components/Main';
+import RegisterReactBootstarp from './components/RegisterReactBootstarp';
 
 function App() {
-  const handleToGetValue = (event) =>{
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    console.log(email, password);
+const router = createBrowserRouter([
+  {
+    path: '/', element: <Main></Main>,
+    children:[
+      {
+        path: '/', element:<RegisterReactBootstarp></RegisterReactBootstarp>
+      },
+      {
+        path: '/signup', element:<RegisterReactBootstarp></RegisterReactBootstarp>
+      },
+      {
+        path: '/login', element: <Login></Login>
+      },
+    ]
   }
-  const handleOnChange = (e) =>{
-    console.log(e.target.value);
-  }
-
-  const handlePassChange = e =>{
-    console.log(e.target.value);
-  }
+])
+  
   return (
-    <div className="App">
+    <div className="">
+      
+      <RouterProvider
+      router={router}></RouterProvider>
       
     </div>
   );
